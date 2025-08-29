@@ -1,0 +1,44 @@
+Given a set of m distinct positive integers and a value ‘N’. Count the total number of ways we can form ‘N’ by  adding the array elements. Repetitions and different arrangements are allowed.
+Note: Answer can be quite large output the answer modulo 109+7.
+
+Example 1:
+
+Input:
+m = 3 , N = 7
+Arr[] = {1,5,6}
+Output: 6
+Explanation: The different ways are:
+1+1+1+1+1+1+1
+1+1+5
+1+5+1
+5+1+1
+1+6
+6+1
+
+
+
+class Solution {
+ 
+    public static Integer[] dp; // only depends on current sum
+    
+    public int possibles(int[] arr, int target, int cur) {
+        if (cur == target) return 1;   // found a valid way
+        if (cur > target) return 0;    // invalid path
+
+        if (dp[cur] != null) return dp[cur]; // already computed
+
+        int ways = 0;
+        for (int num : arr) {
+            ways = (ways + possibles(arr, target, cur + num));
+        }
+        
+        System.out.println(Arrays.toString(dp));
+        
+        return dp[cur] = ways; // store result for this "cur"
+    }
+    
+    public int countWays(int arr[], int m, int N) {
+        dp = new Integer[N+1]; // initialize only once
+        return possibles(arr, N, 0);
+    }
+}
