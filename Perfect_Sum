@@ -31,7 +31,7 @@ class Solution {
 Expalanation:
 
 
-static int mod = 1000000007;
+static int mod = 1000000007;                //optional
 
 We use a big prime number (10^9+7) so that if counts become very large, we take remainder.
 
